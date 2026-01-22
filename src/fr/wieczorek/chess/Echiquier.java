@@ -1,5 +1,7 @@
 package fr.wieczorek.chess;
 
+import java.awt.*;
+
 public class Echiquier {
 
     private Case[][] tableauCases;
@@ -9,9 +11,9 @@ public class Echiquier {
     public Echiquier(){
         this.tableauCases = new Case[8][8];
 
-        for(int x = 1; x < 9; x++){
-            for(int y = 1; y < 9; y++){
-                this.tableauCases[x-1][y-1] = new Case(x,y);
+        for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+                this.tableauCases[x][y] = new Case(x,y);
             }
         }
     }
@@ -19,10 +21,10 @@ public class Echiquier {
     public void instancierEchiquier(int disposition){
         if(disposition == BASIC_DISPOSITION) {
             //pièces blanches
-            this.tableauCases[4][7].setPiece(new Roi(4,7,true));
+            this.tableauCases[7][4].setPiece(new Roi(7,4,true));
 
             //pièces noires
-            this.tableauCases[4][7].setPiece(new Roi(4,0,false));
+            this.tableauCases[0][4].setPiece(new Roi(0,4,false));
         }else{
             throw new IllegalArgumentException("Disposition des pièces inconnue");
         }
@@ -30,5 +32,21 @@ public class Echiquier {
 
     public Case[][] getTableauCases() {
         return tableauCases;
+    }
+
+    public Case getCase(int x, int y){
+        if(x > 7 || y > 7){
+            throw new ArrayIndexOutOfBoundsException("Received x = "+ x + " and y = "+ y +" while x and y cannot surpass 7");
+        }
+
+        return this.tableauCases[x][y];
+    }
+
+    public Case getCase(Point puntos){
+        if(puntos.getX() > 7 || puntos.getY() > 7){
+            throw new ArrayIndexOutOfBoundsException("Received x = "+ puntos.getX() + " and y = "+ puntos.getY() +" while x and y cannot surpass 7");
+        }
+
+        return this.tableauCases[(int) puntos.getX()][(int) puntos.getY()];
     }
 }

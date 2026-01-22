@@ -26,6 +26,14 @@ public class Case {
         return new Point(x,y);
     }
 
+    public boolean isEmpty(){
+        return this.piece == null;
+    }
+
+
+    public boolean equals(Case c){
+        return this.piece == c.piece && this.x == c.x && this.y == c.y;
+    }
 
 
 }

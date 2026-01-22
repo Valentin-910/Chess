@@ -14,6 +14,7 @@ JCHESSFENETRE = $(BIN)/$(PKG_PATH)/JChessFenetre.class
 JECHIQUIER = $(BIN)/$(PKG_PATH)/JEchiquier.class
 PIECE = $(BIN)/$(PKG_PATH)/Piece.class
 ROI = $(BIN)/$(PKG_PATH)/Roi.class
+PIECEDRAGLISTENER = $(BIN)/$(PKG_PATH)/PieceDragListener.class
 
 $(BIN):
 	if not exist $(BIN) mkdir $(BIN)
@@ -22,9 +23,6 @@ $(CHESS): $(SRC)/$(PKG_PATH)/Chess.java $(ECHIQUIER) $(JCHESSFENETRE) $(CONTROLE
 	javac -cp $(BIN) -d $(BIN) $<
 
 $(ECHIQUIER): $(SRC)/$(PKG_PATH)/Echiquier.java $(CASE) $(ROI)
-	javac -cp $(BIN) -d $(BIN) $<
-
-$(CONTROLEUR): $(SRC)/$(PKG_PATH)/Controleur.java
 	javac -cp $(BIN) -d $(BIN) $<
 
 $(JCHESSFENETRE): $(SRC)/$(PKG_PATH)/JChessFenetre.java $(JECHIQUIER)
@@ -44,6 +42,11 @@ $(JECHIQUIER): $(SRC)/$(PKG_PATH)/JEchiquier.java $(JCASE)
 
 $(JCASE): $(SRC)/$(PKG_PATH)/JCase.java
 	javac -cp $(BIN) -d $(BIN) $<
+
+$(PIECEDRAGLISTENER) $(CONTROLEUR): \
+	$(SRC)/$(PKG_PATH)/Controleur.java \
+	$(SRC)/$(PKG_PATH)/PieceDragListener.java
+	javac -cp $(BIN) -d $(BIN) $^
 
 run: $(CHESS)
 	java -cp $(BIN) fr.wieczorek.chess.Chess
