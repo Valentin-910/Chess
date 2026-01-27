@@ -9,11 +9,14 @@ public class JCase extends JPanel {
 
     private boolean estCliquee;
 
+    private boolean afficherMovePossible;
+
     public JCase(Case c){
         super();
         this.caseAffichee = c;
-        //this.setLayout(new BorderLayout());
     }
+
+    public void setAfficherMovePossible(boolean val){ this.afficherMovePossible = val; }
 
     public Case getCaseAffichee(){
         return this.caseAffichee;
@@ -31,6 +34,8 @@ public class JCase extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        Graphics pinceau = g.create();
+
         Point positionCase = caseAffichee.getPosition();
         if(estCliquee){
             this.setBackground(new Color(57, 227, 86));
@@ -39,6 +44,7 @@ public class JCase extends JPanel {
         }else {
             this.setBackground(new Color(207, 146, 83));
         }
+
 
         if(caseAffichee.getPiece() != null) {
             ImageIcon imageIcon = new ImageIcon(caseAffichee.getPiece().getPhotoPiece());
@@ -77,6 +83,11 @@ public class JCase extends JPanel {
 
             // Dessiner l'image redimensionnée et centrée
             g.drawImage(image, x, y, nouvelleLargeur, nouvelleHauteur, this);
+        }
+
+        if(afficherMovePossible){
+            pinceau.setColor(new Color(83, 207, 188));
+            pinceau.fillOval((this.getWidth()/2) - 20, (this.getHeight()/2) - 20, 40, 40);
         }
     }
 

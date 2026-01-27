@@ -1,6 +1,5 @@
 package fr.wieczorek.chess;
 
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -23,12 +22,13 @@ public class PieceDragListener extends MouseAdapter {
         JCase caseCliquee = (JCase) e.getSource();
         if(moveEnCours){
             moveEnCours = false;
+            controleur.getVue().getVueEchiquier().resetCasesMouvementsPossible(
+                    this.casePieceRecuperee.getCaseAffichee().getPiece().getMouvementPattern());
+
             if(!caseCliquee.equals(this.casePieceRecuperee)){
-                caseCliquee.getCaseAffichee().setPiece(this.casePieceRecuperee.getCaseAffichee().getPiece());
-                this.casePieceRecuperee.getCaseAffichee().setPiece(null);
-            }else{
-                //rien...
+                controleur.getEchiquier().makeMove(this.casePieceRecuperee.getCaseAffichee(), caseCliquee.getCaseAffichee());
             }
+
             this.casePieceRecuperee.setEstCliquee(false);
             this.casePieceRecuperee.repaint();
             this.casePieceRecuperee = null;
@@ -38,6 +38,8 @@ public class PieceDragListener extends MouseAdapter {
                 moveEnCours = true;
                 caseCliquee.setEstCliquee(true);
                 this.casePieceRecuperee = caseCliquee;
+                controleur.getVue().getVueEchiquier().setCasesMouvementsPossible(
+                        this.casePieceRecuperee.getCaseAffichee().getPiece().getMouvementPattern());
             }
         }
         caseCliquee.repaint();

@@ -30,6 +30,13 @@ public class Case {
         return this.piece == null;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     public boolean equals(Case c){
         return this.piece == c.piece && this.x == c.x && this.y == c.y;

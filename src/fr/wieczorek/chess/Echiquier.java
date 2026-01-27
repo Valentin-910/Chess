@@ -49,4 +49,20 @@ public class Echiquier {
 
         return this.tableauCases[(int) puntos.getX()][(int) puntos.getY()];
     }
+
+    public void makeMove(Case depart, Case arrivee){
+        Piece pieceToMove = depart.getPiece();
+        boolean[][] moves = pieceToMove.getMouvementPattern();
+
+        int xArrivee = arrivee.getX();
+        int yArrivee = arrivee.getY();
+
+        if(moves[xArrivee][yArrivee]){
+            pieceToMove.setX(xArrivee);
+            pieceToMove.setY(yArrivee);
+
+            arrivee.setPiece(pieceToMove);
+            depart.setPiece(null);
+        }
+    }
 }
