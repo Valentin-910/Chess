@@ -28,13 +28,29 @@ public class Echiquier {
         if(disposition == BASIC_DISPOSITION) {
             //pièces blanches
             Roi roiBlanc = new Roi(7,4,true);
+            Tour tourBlanche = new Tour(7,7,true);
+            Tour deuxiemeTourBlanche = new Tour(7,0,true);
+
             this.tableauCases[7][4].setPiece(roiBlanc);
+            this.tableauCases[7][7].setPiece(tourBlanche);
+            this.tableauCases[7][0].setPiece(deuxiemeTourBlanche);
+
             this.filePiecesBlanches.add(roiBlanc);
+            this.filePiecesBlanches.add(tourBlanche);
+            this.filePiecesBlanches.add(deuxiemeTourBlanche);
 
             //pièces noires
             Roi roiNoir = new Roi(0,4,false);
+            Tour tourNoire = new Tour(0,0,false);
+            Tour deuxiemeTourNoire = new Tour(0,7,false);
+
             this.tableauCases[0][4].setPiece(roiNoir);
+            this.tableauCases[0][0].setPiece(tourNoire);
+            this.tableauCases[0][7].setPiece(deuxiemeTourNoire);
+
             this.filePiecesNoires.add(roiNoir);
+            this.filePiecesNoires.add(tourNoire);
+            this.filePiecesNoires.add(deuxiemeTourNoire);
         }else{
             throw new IllegalArgumentException("Disposition des pièces inconnue");
         }
@@ -72,6 +88,14 @@ public class Echiquier {
             pieceToMove.setX(xArrivee);
             pieceToMove.setY(yArrivee);
 
+            if(arrivee.getPiece() != null){
+                if(arrivee.getPiece().isWhite()){
+                    this.filePiecesBlanches.remove(arrivee.getPiece());
+                }else{
+                    this.filePiecesNoires.remove(arrivee.getPiece());
+                }
+            }
+
             arrivee.setPiece(pieceToMove);
             depart.setPiece(null);
         }
@@ -80,6 +104,7 @@ public class Echiquier {
     public boolean[][] getMouvementsPossibles(Piece pieceToMove){
         return getMouvementsPossibles(pieceToMove, true);
     }
+
 
     public boolean[][] getMouvementsPossibles(Piece pieceToMove, boolean isRoi){
         boolean[][] moves = pieceToMove.getMouvementPattern();
