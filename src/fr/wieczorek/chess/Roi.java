@@ -10,7 +10,7 @@ public class Roi extends Piece {
     public String getPhotoPiece(){
         StringBuilder sb = new StringBuilder();
         sb.append("res/");
-        if(isWhite){
+        if(isWhite()){
             sb.append("roi-blanc.png");
         }else{
             sb.append("roi-noir.png");
@@ -18,6 +18,13 @@ public class Roi extends Piece {
         return sb.toString();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append((isWhite())? "white-": "black-");
+        sb.append("king");
+        return sb.toString();
+    }
 
     @Override
     public boolean[][] getMouvementPattern(){

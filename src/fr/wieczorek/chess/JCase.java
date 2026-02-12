@@ -87,7 +87,7 @@ public class JCase extends JPanel {
 
         if(afficherMovePossible){
             pinceau.setColor(new Color(83, 207, 188));
-            pinceau.fillOval((this.getWidth()/2) - 20, (this.getHeight()/2) - 20, 40, 40);
+            pinceau.fillOval((this.getWidth()/2) - 15, (this.getHeight()/2) - 15, 30, 30);
         }
     }
 

@@ -39,7 +39,7 @@ public class PieceDragListener extends MouseAdapter {
                 caseCliquee.setEstCliquee(true);
                 this.casePieceRecuperee = caseCliquee;
                 controleur.getVue().getVueEchiquier().setCasesMouvementsPossible(
-                        this.casePieceRecuperee.getCaseAffichee().getPiece().getMouvementPattern());
+                        this.controleur.getEchiquier().getMouvementsPossibles(this.casePieceRecuperee.getCaseAffichee().getPiece()));
             }
         }
         caseCliquee.repaint();
